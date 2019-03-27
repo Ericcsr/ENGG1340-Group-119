@@ -8,12 +8,12 @@ Learning English as a second language, we profoundly understand the difficulty t
 2. If the category is chosen, user can choose mode learning or reviewing mode of the program.
 3. In learning mode user is required to input description of the word (Or multiple choices).
 4. From time to time user will come across vocabularies that has shown up but fail to memorize.
-5. In revision mode user will be required to deal with didn't mastered words only.
-6. No matter user choose to end the program or exit the program accidentally
+5. In revision mode user will be required to deal with poorly memorized words only.
+6. No matter user choose to end the program pn purpose or exit the program accidentally
    user can click and resume last learning progress.
 7. User can exit to the menu of choosing mode or category whenever they like.  
 ### In developer's view:  
-1. Design interface.
+1. Implement a interface for user.
 2. Sort the word list of non-mastered word in a properly ranked method.
 3. Insert the previous non-master words from mentioned list to a linked list of
    word pending to pop up from time to time.
