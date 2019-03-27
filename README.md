@@ -12,7 +12,7 @@ In user view:
 6. No matter user choose to end the program or exit the program accidentally
    user can click and resume last learning progress.
 7. User can exit to the menu of choosing mode or category whenever they like.
-In developer's view:
+In developer's view:  
 1. Design interface.
 2. Sort the word list of non-mastered word in a properly ranked method.
 3. Insert the previous non-master words from mentioned list to a linked list of
