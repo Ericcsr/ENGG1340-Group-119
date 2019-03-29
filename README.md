@@ -9,7 +9,7 @@ Learning English as a second language, we profoundly understand the difficulty t
 3. In learning mode user is required to input description of the word (Or multiple choices).
 4. From time to time user will come across vocabularies that has shown up but failed to be memorized.
 5. In revision mode user will encounter memorized words only.
-6. No matter in which way user exit the program, accidentally or by command they can always come back and resume last learning progress.
+6. No matter in which way user exit the program, accidentally or by command, they can always come back and resume last learning progress.
 7. User can exit to the menu of choosing mode or category whenever they like.  
 ### In developer's view:  
 1. Design interface.
