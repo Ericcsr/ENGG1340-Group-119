@@ -1,5 +1,5 @@
 #        ENGG1340-Group-119
-##          Problem statement:  
+##          Problem Statement:  
 Learning English as a second language, we profoundly understand the difficulty to memorize tens of thousands of vocabularies. A traditional way to memorize vocabularies is to study the dictionary, but during this tedious process you can easily get lost and bored.The efficiency of memorizing those unrelated words is relatively low. Therefore, our project aims to help users learn new words effectively and systematically. You will no longer be bothered by the boring alphabetical order, our app will introduce new words tailored to the user, and users can even choose words from different subjects that we have stored in the “database”.
 
 ##          Problem Setting:  
