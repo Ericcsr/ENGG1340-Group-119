@@ -1,0 +1,65 @@
+#include <iostream>
+#include <ostream>
+#include <string>
+#include <iomanip>
+#include <list>
+
+const int RIGHT_JUST = 0;
+const int LEFT_JUST  = 1;
+const int MIDDLE_JUST= 2;
+
+using namespace std;
+//Superset: Screen class
+
+//ostream operator<<(&ostream output,const line &L);
+class line
+{
+public:
+  line(string text,int len,int format);
+  ostream &operator<<(ostream &output);  //Define the output stream
+private:
+  string Line;
+};
+
+class screen
+{
+public:
+  screen(int w,int h);                                    //Initialize the screen object
+  void screeninit(int w,int h);                           //If this is a father class
+  void setHead(string heading);                           //Set the heading of the string
+  void setLine(string line_content,int format);  //Set line index
+  void screenprint(void);                                 //Print out content of the screen
+  ~screen();
+private:
+  int width;
+  int height;
+  int line_index = 1;
+  list<line> *lines;                                      //Dynamic Line object pointer
+  string head;
+};
+
+class menu: private screen                                //Subclass menu set parameter and content
+{
+public:
+  menu(string heading,int choice_num,int wid);
+  void setMenuChoices(string choice_list[]);
+  void menuPrint(void);
+  ~menu();
+};
+
+class question: private screen                            //Subclass Question set parameter and content
+{
+public:
+  question(string heading,int choice_num,int wid);
+  void setQuestion(string que,string choice_list[]);
+  void questionPrint(void);
+  ~question();
+};
+
+class message: private screen                             //Subclass Message set Parameter and content
+{
+public:
+  message(string heading,string content,int wid);
+  void MessagePrint(void);
+  ~message();
+};
