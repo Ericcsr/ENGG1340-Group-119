@@ -11,7 +11,7 @@ void filelist::readFile(string infile)
     while(getline(fin,str_buffer))
     {
         vector<string> buffer_vect;
-        for(long long int cursor = str_buffer.find(@);cursor!=string::npos;cursor = str_buffer.find(@))
+        for(long long int cursor = str_buffer.find('@');cursor!=string::npos;cursor = str_buffer.find('@'))
         {
             buffer_vect.push_back(str_buffer.substr(0,cursor);
             str_buffer.erase(0,cursor+1);
@@ -54,6 +54,12 @@ filelist::filelist(string infile,string outfile)
     readFile(infile);
     writeFile(outfile,*buffer_list);
     ofile =  outfile;
+    ifile = infile;
+}
+
+int filelist::size(void)
+{
+    return size;
 }
 
 //This function return the last item of the 2-D vector
@@ -156,13 +162,37 @@ vector filelist::&operator[](int i)
 {
     return *buffer_list[i];
 }
+//This might be only valid function it might use 
+//Return a decoded 2-d vector
+vector<vector<string>> filelist::getRawdata()
+{
+    return *buffer_list;
+}
+
+void filelist::setRawdata(vector<vector<string>> updated_list)
+{
+    *buffer_list = updated_list; //Warning No reference
+    writeFile();
+}
+
+//This function can be used to update, re-read ifile to outfile
+void filelist::refresh()
+{
+    readFile(ifile);
+    writeFile(ofile,*buffer_list); 
+}
+
 //This is defination of destructor 
 //Only when this object is created as a dynamic object can this be deleted
-vector filelist::~filelist()
+filelist::~filelist()
 {
     delete buffer_list;
     buffer_list = NULL; //Avoid dangling pointer
 }
+
+
+
+
 //=====================Class_filelist_end================================
 
 //=======================Independent functions==========================
@@ -173,13 +203,53 @@ void file_error_handler(string name)
     exit(1);
 }
 
-bool isfile(string filename)
+
+//Using another file to record the condition of current files
+//It can change file condition sent to it as well as check the existance of the file
+int check_file(int file_condition[])
 {
     ifstream testin;
     testin.open(filename)
+    int buffer;
     if(testin.fail())
+    {
+        cout<<"Cannot open check file!"<<endl;
         return 0;
-    else
-        return 1;
+    }
+    while(testin>>buffer)
+    {
+        file_condition[buffer-1] = 1; //value can be over written many times 
+    }
+    testin.close();
+    return 1;
 }
 
+void reset_check_file(int index,int file_condition[]) // 3 reoresent all files
+{
+    ofstream testout;
+    testout.open("check.txt");
+    switch index
+    {
+        case 0:
+            if(file_condition[1]==1) testout<<1<<endl; //Reset the second word list
+            if(file_condition[2]==1) testout<<2<<endl; //Reset the third word list
+            file_conditon[0] = 0;
+            break;
+        case 1:
+            if(file_condition[0]==1) testout<<0<<endl; //Reset the second word list
+            if(file_condition[2]==1) testout<<2<<endl; //Reset the third word list
+            file_condition[1] = 0;
+            break;
+        case 2:
+            if(file_condition[1]==1) testout<<1<<endl; //Reset the second word list
+            if(file_condition[0]==1) testout<<0<<endl; //Reset the third word list
+            file_condition[2] = 0;
+            break;
+        case 3:
+            file_condition[0] = 0;
+            file_condition[1] = 0;
+            file_condition[2] = 0;
+            break;
+    }
+    testout.close();
+}

@@ -1,3 +1,6 @@
+#ifndef __FIOMANIP_H__
+#define __FIOMANIP_H__
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -22,11 +25,16 @@ class filelist
         void remove(int index);
         int search(vector<string> target);
         void insert(vector<string> target,int index);
+        vector<vector<string>> getRawdata();
+        void setRawdata(vector<vector<string>>);
+        void refresh(void);
+        int size(void);
         vector &operator[](int i);
         ~filelist();
     private:
         vector<vector<string>> *buffer_list;
         vector<vector<string>>::iterator list_itr;
+        string ifile;
         string ofile;
         int size = 0;
         void readFile(string infile);
@@ -34,3 +42,4 @@ class filelist
         string FormatHandler(vector<string>);        
 };
 
+#endif

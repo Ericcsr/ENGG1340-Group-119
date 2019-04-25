@@ -1,8 +1,11 @@
+#ifndef __SCREENPLAY_H__
+#define __SCREENPLAY_H__
+#define WIDTH 50
 #include <iostream>
 #include <ostream>
 #include <string>
 #include <iomanip>
-#include <list>
+#include <vector>
 
 const int RIGHT_JUST = 0;
 const int LEFT_JUST  = 1;
@@ -18,7 +21,7 @@ public:
   line(string text,int len,int format);
   ostream &operator<<(ostream &output);  //Define the output stream
 private:
-  string Line;
+  string Line; //Since this has nothing to do with dynamic no need for destructor
 };
 
 class screen
@@ -34,7 +37,7 @@ private:
   int width;
   int height;
   int line_index = 1;
-  list<line> *lines;                                      //Dynamic Line object pointer
+  vector<line> *lines;                                      //Dynamic Line object pointer
   string head;
 };
 
@@ -63,3 +66,5 @@ public:
   void MessagePrint(void);
   ~message();
 };
+
+#endif
