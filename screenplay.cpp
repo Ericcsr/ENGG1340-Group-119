@@ -53,7 +53,7 @@ void screen::screeninit(int w,int h) //For ourside init
 void screen::setHead(string heading)
 {
   line header(heading,width,MIDDLE_JUST,'='); //Use "=" to regulate the head
-  line end("",w,MIDDLE_JUST,'=')
+  line end("",w,MIDDLE_JUST,'=') //This function Will print out the 
   lines[0] = header;
   lines[height - 1] = end;
 }
@@ -86,7 +86,7 @@ menu::menu(string heading,int choice_num,int wid)
   setHead(heading);
 }
 
-void setMenuChoices(string choice_list[])
+void menu::setMenuChoices(string choice_list[])
 {
   for(int i=0;i<choice_num;i++)
   {
@@ -113,9 +113,10 @@ question::question(string heading,int choice_num,int wid)
 void question::setQuestion(string que,string choice_list[])
 {
   setLine(que,MIDDLE_JUST);
+  string prefix[]={"A. ","B. ","C. ","D. "};
   for(int i = 0;i<choice_num;i++)
   {
-    setLine(choice_list[i],LEFT_JUST);
+    setLine(prefix[i]+choice_list[i],LEFT_JUST);
   }
 }
 
@@ -141,11 +142,12 @@ message::message(string heading,string content,int wid)
   int begin_index = 0;
   (length%wid)?(line_num = length/wid+1):(line_num = length/wid);
   screeninit(wid,line_num);
-  for(int i = 0;i<line_num;i++)
+  for(int i = 0;i<line_num-1;i++)
   {
     setLine(content.substr(begin_index,wid),LEFT_JUST);
     begin_index +=width;
   }
+  setLine(content.substr(begin_index),LEFT_JUST);//Show the last line of the string
 }
 
 void MessagePrint()
@@ -153,3 +155,7 @@ void MessagePrint()
   screenprint();
 }
 /*===================Message_End=======================*/
+
+
+
+
