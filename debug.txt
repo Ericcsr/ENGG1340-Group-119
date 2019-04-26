@@ -1,0 +1,9 @@
+apple@a red fruit@9@
+banana@a yellow fruit@9@
+pear@a sweet fruit@9@
+grape@a purple fruit@9@
+pinapple@a big yellow fruit@9@
+tomato@a red soft fruit@9@
+orange@an orange fruit@9@
+watermelon@a large green melon@9@
+cherry@a small crystal fruit@9@

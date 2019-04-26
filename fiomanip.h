@@ -14,7 +14,7 @@ using namespace std;
 void file_error_handler(string name);
 int check_file(int file_condition[]);
 void reset_check_file(int index,int file_condition[]);
-int file_condition[3] = {0,0,0}; //This saves the ustage condition of files
+
 
 class filelist
 {

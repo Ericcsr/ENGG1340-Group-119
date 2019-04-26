@@ -1,7 +1,7 @@
 #ifndef __SCREENPLAY_H__
 #define __SCREENPLAY_H__
 
-#define WIDTH 50
+#define WIDTH 80
 #include <iostream>
 #include <ostream>
 #include <string>

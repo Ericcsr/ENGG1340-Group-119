@@ -7,14 +7,15 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
-
+//int file_condition[3] = {0,0,0}; //This saves the ustage condition of files
 
 
 class kernel
 {
     public:
         kernel(int vocabulary_bag,string menu_name,bool new_old);
-        kernel_run(void); //Local main
+        void kernel_run(void); //Local main
+        ~kernel();
     private:
         wordlist *old_wordlist;
         wordlist *new_wordlist;
@@ -30,7 +31,7 @@ class kernel
         //These are runtime functions
         void judge(word candidate); //determine the direction of the candidate
         word valve(void); //Determine which Guy to be poped
-        vector<string> wrong_gen(); //generate wrong answer vector with 3 wrong answer.
+        vector<string> wrong_gen(word candidate); //generate wrong answer vector with 3 wrong answer.
         //Below is running condition diagnal function
         //This can show weather learning procedure has been completed
         int check_watermark(); //return 0 if both list is empty 1 is both is not empty 2: new 3: old is empty

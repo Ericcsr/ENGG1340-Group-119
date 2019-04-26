@@ -152,7 +152,7 @@ question::question(string heading,int choce_num,int wid)
 void question::setQuestion(string que,string choice_list[])
 {
   setLine(que,MIDDLE_JUST);
-  string prefix[]={"A. ","B. ","C. ","D. "};
+  string prefix[4]={"A. ","B. ","C. ","D. "};
   for(int i = 0;i<choice_num;i++)
   {
     setLine(prefix[i]+choice_list[i],LEFT_JUST);
@@ -202,7 +202,7 @@ message::~message()
   lines = NULL;
 }
 /*===================Message_End=======================*/
-
+/*
 // below are main for debug
 #define DEBUG
 #define SCREEN_DEBUG
@@ -217,7 +217,7 @@ int main()
   test_screen.setHead("Test");
   for(int i=0;i<5;i++)
   {
-    test_screen.setLine("This is new test named Aaekghkheuhfiheiohfahriuqeohriouhe",MIDDLE_JUST);
+    test_screen.setLine("This is new test",MIDDLE_JUST);
   }
  test_screen.screenprint();
   #endif
@@ -227,28 +227,23 @@ int main()
   string list[] = {"This is new","This is new","This is new","This is new"};
   test_menu.setMenuChoices(list);
   test_menu.menuPrint();
-  menu debug1 ("second menu",3,50);
-  string list1[] ={"apple","banana","pear"};
-  debug1.setMenuChoices(list1);
-  debug1.menuPrint();
   #endif
 
   #ifdef QUESTION_DEBUG
+  if(1)
+  {
   question test_question("Question 1",4,50);
   //string list[] = {"This is new","This is new","This is new","This is new"};
   test_question.setQuestion("What is debugging",list);
   test_question.questionPrint();
-  question debug2 ("second question",3,50);
-  string list2[] ={"apple","banana","pear"};
-  debug2.setQuestion("choose your favorite fruit:",list1);
-  debug2.questionPrint();
+  }
   #endif
 
   #ifdef MESSAGE_DEBUG
-  string msg ="There is a man named bruce and an apple named Ajewnkqfnekrjgoeqjqoinwrjkfnalkhfus they are best friend forever!!!";
+  string msg ="There is a man names bruce and an apple named jobs they are best friend forever!!!";
   message test_message("Message 1",msg,50);
   test_message.MessagePrint();
   #endif
   cout<<"I am Alive"<<endl;
 }
-#endif
+#endif */

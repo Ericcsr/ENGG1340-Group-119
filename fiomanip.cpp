@@ -145,7 +145,7 @@ int filelist::search(vector<string> target)
 //This function can insert a target to the function
 void filelist::insert(vector<string> new_item,int index)
 {
-    if(index>=size)
+    if(index>size)
     {
         cout<<"Index out of range"<<endl;
         exit(1);
@@ -217,7 +217,7 @@ int check_file(int file_condition[])
     }
     while(testin>>buffer)
     {
-        file_condition[buffer-1] = 1; //value can be over written many times
+        file_condition[buffer] = 1; //value can be over written many times
     }
     testin.close();
     return 1;
@@ -244,42 +244,42 @@ void reset_check_file(int index,int file_condition[]) // 3 reoresent all files
             if(file_condition[0]==1) testout<<0<<endl; //Reset the third word list
             file_condition[2] = 0;
             break;
-        case 3:
+        case 3://Clean all record
             file_condition[0] = 0;
             file_condition[1] = 0;
             file_condition[2] = 0;
             break;
+	default://Refresh all check file according to current file_condition
+	    if(file_condition[0]==1) testout<<0<<endl;
+	    if(file_condition[1]==1) testout<<1<<endl;
+	    if(file_condition[2]==1) testout<<2<<endl;
     }
     testout.close();
 }
 
 //Below are code for debug use
-#define DEBUG
-#ifdef DEBUG
+//#define DEBUG
+//#ifdef DEBUG
 //#define FILE_LIST_DEBUG
 //#define INDIVIDUAL_DEBUG
-#define FILE_LIST_DEBUG
+/*
 int main()
 {
-  #ifdef FILE_LIST_DEBUG
+  //#ifdef FILE_LIST_DEBUG
 
-  filelist test_list("debug.txt","debug_1.txt");
+  filelist test_list("debug.txt","debug.txt");
   vector<string> test_buffer;
   test_buffer = test_list[2];
   //test_list.insert(test_buffer,1);
-  test_list.insert(test_buffer,0);
-  //test_list.refresh();
-  cout<<test_list[0][0]+"   "+test_list[0][1]+"   "+test_list[0][2]<<endl;
-  test_list.push_head(test_buffer);
-  test_list.append(test_buffer);
-  cout<<test_list.getSize()<<endl;
-  #endif
+  test_list.insert(test_buffer,1);
+  cout<<test_buffer[0]+" "+test_buffer[1]+" "+test_buffer[2]<<endl;
+  //#endif
 
-  #ifdef INDIVIDUAL_DEBUG
+  //#ifdef INDIVIDUAL_DEBUG
   check_file(file_condition);
   string t;
   cin>>t;
   reset_check_file(0,file_condition);
-  #endif
-}
-#endif
+  //#endif
+}*/
+//#endif

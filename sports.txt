@@ -1,11 +1,10 @@
-layup@a skill in basketball in which players walk three steps and shoot near the basket@A layup in basketball is a shot made from short range by a player on the move toward the basket. The player might utilize the backboard if he approaches the hoop from an angle.@10@
-offside@being nearer to the goal than the defenders@Law requiring at least two defenders to be between an attacker and the goal line when the ball is passed to the attacker.@10@
-screen@an act in basketball that delay the movement of a defensive player@A screen in basketball is the act of an offensive player delaying or disrupting the movement of a defensive player by standing still in his path, with his feet not moving.@10@
-downtown@places on a basketball court far away from the basket@Downtown in basketball is a term to describe the area beyond the three-point arc. If a score is made from beyond the three-point arc, an announcer will use this phrase.@10@
-advance@to move towards the next base as the baserunner@To advance in baseball is to move towards the next base in the circuit as the baserunner. For example, if a baserunner moves from first base to second base and is called safe, then he has successfully advanced.@10@
-medley@using different strokes in swimming race@A race that includes one or more laps in each of four swimming styles.@10@
-trap@a denfensive strategy in basketball to surround the ball-hander@A trap in basketball is a defensive strategy for forcing a turnover by having multiple defensive players surround the ball-handler near the boundary lines making it difficult for him to escape.@10@
-baton@a short stick used in relay race@A short stick or tube passed from runner to runner in a relay race.@10@
-tee@where a golf ball placed on@A small peg (wooden or plastic) on which the ball is placed for the first shot of each hole.@10@
-goalkeeper@a person in soccer whose role is to stop the ball from entering the goal@Player whose role is to stop the ball from entering the goal, and the only player who can handle the ball in general play.@10@
-
+layup@a skill in basketball in which players walk three steps and shoot@A layup in basketball is a shot made from short range by a player on the move toward the basket. The player might utilize the backboard if he approaches the hoop from an angle.@9@
+offside@being nearer to the goal than the defenders@Law requiring at least two defenders to be between an attacker and the goal line when the ball is passed to the attacker.@9@
+screen@an act in basketball that delay the movement of a defensive player@A screen in basketball is the act of an offensive player delaying or disrupting the movement of a defensive player by standing still in his path, with his feet not moving.@9@
+downtown@places on a basketball court far away from the basket@Downtown in basketball is a term to describe the area beyond the three-point arc. If a score is made from beyond the three-point arc, an announcer will use this phrase.@9@
+advance@to move towards the next base as the baserunner@To advance in baseball is to move towards the next base in the circuit as the baserunner. For example, if a baserunner moves from first base to second base and is called safe, then he has successfully advanced.@9@
+medley@using different strokes in swimming race@A race that includes one or more laps in each of four swimming styles.@9@
+trap@a denfensive strategy in basketball to surround the ball-hander@A trap in basketball is a defensive strategy for forcing a turnover by having multiple defensive players surround the ball-handler near the boundary lines making it difficult for him to escape.@9@
+baton@a short stick used in relay race@A short stick or tube passed from runner to runner in a relay race.@9@
+tee@where a golf ball placed on@A small peg (wooden or plastic) on which the ball is placed for the first shot of each hole.@9@
+goalkeeper@a soccerplayer whose role is to stop the ball from entering the goal@Player whose role is to stop the ball from entering the goal, and the only player who can handle the ball in general play.@9@
