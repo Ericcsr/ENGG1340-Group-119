@@ -8,19 +8,21 @@
 using namespace std;
 //Same format read and write
 //Input a 2-D list, save each sub-list as a line in a file
-//Each Item is separated by given seperator default = '@' 
+//Each Item is separated by given seperator default = '@'
 //The sequence need to be First in First out
 //Detailed Explanation and implementation please refers to CPP file
 void file_error_handler(string name);
-void isfile(string name);
+int check_file(int file_condition[]);
+void reset_check_file(int index,int file_condition[]);
+int file_condition[3] = {0,0,0}; //This saves the ustage condition of files
 
 class filelist
 {
     public:
         filelist(string infile,string outfile);
-        vector pop_end(void);
-        vector pop_front(void);
-        void push_head(vector<string> new_item); 
+        vector<string> pop_end(void);
+        vector<string> pop_front(void);
+        void push_head(vector<string> new_item);
         void append(vector<string> new_item);
         void remove(int index);
         int search(vector<string> target);
@@ -28,8 +30,8 @@ class filelist
         vector<vector<string>> getRawdata();
         void setRawdata(vector<vector<string>>);
         void refresh(void);
-        int size(void);
-        vector &operator[](int i);
+        int getSize(void);
+        vector<string> &operator[](int i);
         ~filelist();
     private:
         vector<vector<string>> *buffer_list;
@@ -38,8 +40,8 @@ class filelist
         string ofile;
         int size = 0;
         void readFile(string infile);
-        void writeFile(string outfile,vector<vector<string>> buf_list);
-        string FormatHandler(vector<string>);        
+        void writeFile(string outfile);
+        string FormatHandler(vector<string>);
 };
 
 #endif
