@@ -25,7 +25,7 @@ Learning English as a second language, we profoundly understand the difficulty t
 5. Preserve running datas in files and update them in real time.
 6. Determine which word to popup next based on a rule subject to "Ebbinghaus forgetting curve".
 ## Functionalities and Features
-We successfully solve all the problem settings. Therefore user is expected to enjoy all the functions we mentioned in [Problem setting>In user's view]
+We successfully solve all the problem settings. Therefore user is expected to enjoy all the functions we mentioned in [Problem setting>In user's view](https://github.com/Ericcsr/ENGG1340-Group-119/blob/master/README.md#in-users-view).
 
 More features are waiting to be discovered by you! Or you can [click here](http://) to check them.
 ## Input/Output Specifications
