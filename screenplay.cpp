@@ -2,32 +2,60 @@
 /*==================line_start============================*/
 //Below are member function of Line Class
 //Attention: Len must be larger than lengh of text
-line::line(string text,int len,int format,char fill = ' ')
+line::line(string text,int len,int format,string fill = " ")
 {
   int length = text.length();
-  switch format
+  Line = text;
+  switch (format)
   {
     case RIGHT_JUST:
-      Line = fill*(len-length)+text;
+    {
+      for(int i=0;i<(len-length);i++)
+      {
+        Line = fill + Line;
+      }
       break;
+    }
     case LEFT_JUST:
-      Line = text + fill*(len - length);
+    {
+      for(int i=0;i<(len-length);i++)
+        Line = Line + fill; //
       break;
+    }
     case MIDDLE_JUST:
+    {
       int seperator = (len - length)/2;
       int remain = (len-length)-seperator;
-      Line = seperator*fill+text+remain*fill;
+      for(int i=0;i<seperator;i++)
+      {
+        Line = fill + Line;
+      }
+      for(int i=0;i<remain;i++)
+      {
+        Line = Line + fill;
+      }
       break;
+    }
     default:
       Line = "Wrong Format!";   //This is left for debugging purpose
   }
 }
 
-ostream line::&operator<<(&ostream output)
+line::line(){}
+
+ostream &operator<<(ostream &output,const line &L)
 {
-  output<<Line;  //Becarful Not to Auto Shift lines
+  output<<L.Line;  //Becarful Not to Auto Shift lines
   return output;
 }
+
+//Over loaded L for assignment
+
+void line::operator = (const line &L)
+{
+  Line = L.Line;
+}
+
 /*==================line_end============================*/
 
 /*===================Screen_start=======================*/
@@ -40,50 +68,54 @@ screen::screen(int w,int h)
 {
   width = w;
   height = h+2; //+2 means include outline of the block
-  lines = new line [height];
+  lines = new vector<line>(height);
 }
+
+screen::screen(){}
 
 void screen::screeninit(int w,int h) //For ourside init
 {
   width = w;
   height = h+2; //+2 means include outline of the block
-  lines = new line [height];
+  lines = new vector<line>(height);
 }
 
 void screen::setHead(string heading)
 {
-  line header(heading,width,MIDDLE_JUST,'='); //Use "=" to regulate the head
-  line end("",w,MIDDLE_JUST,'=') //This function Will print out the 
-  lines[0] = header;
-  lines[height - 1] = end;
+  line header(heading,width,MIDDLE_JUST,"="); //Use "=" to regulate the head
+  line end("",width,MIDDLE_JUST,"=") ;//This function Will print out the
+  (*lines)[0] = header;
+  (*lines)[height-1] = end;
 }
 
 void screen::setLine(string line_content,int format)
 {
   line current_line(line_content,width,format);
-  lines[index] = current_line;
+  (*lines)[line_index] = current_line;
   line_index++;
 }
 
 void screen::screenprint(void)
 {
-  for(int i = 0;i<height<i++)
+  for(int i = 0;i<height;i++)
   {
-    cout<<lines[i]<<endl;
+    cout<<(*lines)[i]<<endl;
   }
 }
 
 screen::~screen()
 {
   delete lines;
+  lines = NULL;
 }
 /*===================Screen_end=========================*/
 
 /*====================menu_start========================*/
-menu::menu(string heading,int choice_num,int wid)
+menu::menu(string heading,int choce_num,int wid)
 {
-  screeninit(wid,choice_num);
+  screeninit(wid,choce_num);
   setHead(heading);
+  choice_num = choce_num;
 }
 
 void menu::setMenuChoices(string choice_list[])
@@ -98,16 +130,23 @@ void menu::menuPrint()
 {
   screenprint();
 }
+
+menu::~menu()
+{
+  delete lines;
+  lines = NULL;
+}
 /*====================menu_end========================*/
 
 /*=================Question_start=====================*/
 //Attention: Qustion heading is not question;
 //Question heading indicate the number of question or other information
 
-question::question(string heading,int choice_num,int wid)
+question::question(string heading,int choce_num,int wid)
 {
-  screeninit(wid,choice_num+1);  // Since there need space for Question description
+  screeninit(wid,choce_num+1);  // Since there need space for Question description
   setHead(heading);
+  choice_num = choce_num;
 }
 
 void question::setQuestion(string que,string choice_list[])
@@ -128,6 +167,7 @@ void question::questionPrint()
 question::~question()
 {
   delete lines;
+  lines = NULL;
 }
 /*===================Question_end=======================*/
 
@@ -142,6 +182,7 @@ message::message(string heading,string content,int wid)
   int begin_index = 0;
   (length%wid)?(line_num = length/wid+1):(line_num = length/wid);
   screeninit(wid,line_num);
+  setHead(heading);
   for(int i = 0;i<line_num-1;i++)
   {
     setLine(content.substr(begin_index,wid),LEFT_JUST);
@@ -150,12 +191,64 @@ message::message(string heading,string content,int wid)
   setLine(content.substr(begin_index),LEFT_JUST);//Show the last line of the string
 }
 
-void MessagePrint()
+void message::MessagePrint()
 {
   screenprint();
 }
+
+message::~message()
+{
+  delete lines;
+  lines = NULL;
+}
 /*===================Message_End=======================*/
 
+// below are main for debug
+#define DEBUG
+#define SCREEN_DEBUG
+#define MENU_DEBUG
+#define QUESTION_DEBUG
+#define MESSAGE_DEBUG
+#ifdef DEBUG
+int main()
+{
+  #ifdef SCREEN_DEBUG
+  screen test_screen(50,5);
+  test_screen.setHead("Test");
+  for(int i=0;i<5;i++)
+  {
+    test_screen.setLine("This is new test named Aaekghkheuhfiheiohfahriuqeohriouhe",MIDDLE_JUST);
+  }
+ test_screen.screenprint();
+  #endif
 
+  #ifdef MENU_DEBUG
+  menu test_menu("Main Menu",4,50);
+  string list[] = {"This is new","This is new","This is new","This is new"};
+  test_menu.setMenuChoices(list);
+  test_menu.menuPrint();
+  menu debug1 ("second menu",3,50);
+  string list1[] ={"apple","banana","pear"};
+  debug1.setMenuChoices(list1);
+  debug1.menuPrint();
+  #endif
 
+  #ifdef QUESTION_DEBUG
+  question test_question("Question 1",4,50);
+  //string list[] = {"This is new","This is new","This is new","This is new"};
+  test_question.setQuestion("What is debugging",list);
+  test_question.questionPrint();
+  question debug2 ("second question",3,50);
+  string list2[] ={"apple","banana","pear"};
+  debug2.setQuestion("choose your favorite fruit:",list1);
+  debug2.questionPrint();
+  #endif
 
+  #ifdef MESSAGE_DEBUG
+  string msg ="There is a man named bruce and an apple named Ajewnkqfnekrjgoeqjqoinwrjkfnalkhfus they are best friend forever!!!";
+  message test_message("Message 1",msg,50);
+  test_message.MessagePrint();
+  #endif
+  cout<<"I am Alive"<<endl;
+}
+#endif

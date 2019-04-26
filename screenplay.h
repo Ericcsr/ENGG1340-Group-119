@@ -1,5 +1,6 @@
 #ifndef __SCREENPLAY_H__
 #define __SCREENPLAY_H__
+
 #define WIDTH 50
 #include <iostream>
 #include <ostream>
@@ -18,8 +19,10 @@ using namespace std;
 class line
 {
 public:
-  line(string text,int len,int format);
-  ostream &operator<<(ostream &output);  //Define the output stream
+  line(string text,int len,int format,string fill);
+  line();
+  void operator = (const line &L);
+  friend ostream &operator<<(ostream &output,const line &L);  //Define the output stream
 private:
   string Line; //Since this has nothing to do with dynamic no need for destructor
 };
@@ -28,12 +31,13 @@ class screen
 {
 public:
   screen(int w,int h);                                    //Initialize the screen object
+  screen();
   void screeninit(int w,int h);                           //If this is a father class
   void setHead(string heading);                           //Set the heading of the string
   void setLine(string line_content,int format);  //Set line index
   void screenprint(void);                                 //Print out content of the screen
   ~screen();
-private:
+protected:
   int width;
   int height;
   int line_index = 1;
@@ -48,6 +52,8 @@ public:
   void setMenuChoices(string choice_list[]);
   void menuPrint(void);
   ~menu();
+private:
+  int choice_num;
 };
 
 class question: private screen                            //Subclass Question set parameter and content
@@ -57,6 +63,8 @@ public:
   void setQuestion(string que,string choice_list[]);
   void questionPrint(void);
   ~question();
+private:
+  int choice_num;
 };
 
 class message: private screen                             //Subclass Message set Parameter and content
