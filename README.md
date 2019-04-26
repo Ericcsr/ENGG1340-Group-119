@@ -1,7 +1,9 @@
 #        ENGG1340-Group-119
-> Chi ben incomincia, è alla metà dell'opera.
-> A good beginning is half done.
-> --- Quinto Orazio Flacco
+>Chi ben incomincia, è alla metà dell'opera.
+>
+>A good beginning is half done. 
+>
+>--- Quinto Orazio Flacco
 ##          Problem Statement:  
 Learning English as a second language, we profoundly understand the difficulty to memorize tens of thousands of vocabularies. A traditional way to memorize vocabularies is to study the dictionary, but during this tedious process you can easily get lost and bored.The efficiency of memorizing those unrelated words is relatively low. Therefore, our project aims to help users learn new words effectively and systematically. You will no longer be bothered by the boring alphabetical order, our app will introduce new words tailored to the user, and users can even choose words from different subjects that we have stored in the “database”.
 
@@ -18,16 +20,18 @@ Learning English as a second language, we profoundly understand the difficulty t
 1. Design interface.
 2. Sort the word list of non-mastered word in a properly ranking method.
 3. Evaluate user's cognition of a word by giving mutiple choice questions.
-4. Using dynamic memory allocation to minimize run time memory
+4. Using dynamic memory allocation to minimize run time memory.
 5. Store meanings and properties of the words in the database.
-5. Preserve running datas in files and update them in real time
+5. Preserve running datas in files and update them in real time.
+6. Determine which word to popup next based on a rule subject to "Ebbinghaus forgetting curve".
+## Functionalities and Features
+We successfully solve all the problem settings. Therefore user is expected to enjoy all the functions we mentioned in [Problem setting>In user's view]
 
-## Functionalities and features
-
-## Input/output specifications
+More features are waiting to be discovered by you! Or you can [click here](http://) to check them.
+## Input/Output Specifications
 ### Input
 You will mainly be dealing with multiple choice questions where only entering int or char leading each option is fine. What's more, you can always enter `#home` to go back to homepage. 
 ### Output
 New messages will appear right after your input, no new windows will popup.
-## Compilation and execution instructions
-This project is only guaranteed to work in Linux.os. Clone the master brunch to your local path and open this directory in terminal. Enter `make wordmemor` to compile and `./ wordmemor` to execute the project! Just follow the instructions and enjoy the process of exploring English words while the project is running!
+## Compilation and Execution Instructions
+This project is only guaranteed to work in Linux.os. Clone the master brunch to your local path and open this directory in terminal. Enter `make wordmemor` to compile and `./ wordmemor` to execute the project! While the programme is running , just follow the instructions and enjoy the process of exploring English words!
