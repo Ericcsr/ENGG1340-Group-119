@@ -2,24 +2,28 @@
 /*==================line_start============================*/
 //Below are member function of Line Class
 //Attention: Len must be larger than lengh of text
-line::line(string text,int len,int format,string fill = " ")
+
+//function: it's the constructor of Line
+//input: text is the text you want to show, len is the length of the screen, format has three options
+//output: show things on the screen therefore no output
+Line::Line(string text,int len,int format,string fill = " ")
 {
   int length = text.length();
-  Line = text;
+  Line_ = text;
   switch (format)
   {
     case RIGHT_JUST:
     {
       for(int i=0;i<(len-length);i++)
       {
-        Line = fill + Line;
+        Line_ = fill + Line_;
       }
       break;
     }
     case LEFT_JUST:
     {
       for(int i=0;i<(len-length);i++)
-        Line = Line + fill; //
+        Line_ = Line_ + fill; //
       break;
     }
     case MIDDLE_JUST:
@@ -28,32 +32,35 @@ line::line(string text,int len,int format,string fill = " ")
       int remain = (len-length)-seperator;
       for(int i=0;i<seperator;i++)
       {
-        Line = fill + Line;
+        Line_ = fill + Line_;
       }
       for(int i=0;i<remain;i++)
       {
-        Line = Line + fill;
+        Line_ = Line_ + fill;
       }
       break;
     }
     default:
-      Line = "Wrong Format!";   //This is left for debugging purpose
+      Line_ = "Wrong Format!";   //This is left for debugging purpose
   }
 }
 
-line::line(){}
+//function: When init a dymamic vector of this class,
+//vector can be successfully init without parameter
+Line::Line(){}
 
-ostream &operator<<(ostream &output,const line &L)
+//function: to simplify the print procedure
+//operator overload
+ostream &operator<<(ostream &output,const Line &L)
 {
-  output<<L.Line;  //Becarful Not to Auto Shift lines
+  output<<L.Line_;  //Becarful Not to Auto Shift lines
   return output;
 }
 
 //Over loaded L for assignment
-
-void line::operator = (const line &L)
+void Line::operator = (const Line &L)
 {
-  Line = L.Line;
+  Line_ = L.Line_;
 }
 
 /*==================line_end============================*/
@@ -64,77 +71,98 @@ void line::operator = (const line &L)
 //It can be used for multi-purpose
 //Attention: Screen w will be raise up to interface level
 //Make sure the Width is enough
-screen::screen(int w,int h)
+
+//Constructor of Screen
+//input: the width and height of the screen
+Screen::Screen(int w,int h)
 {
-  width = w;
-  height = h+2; //+2 means include outline of the block
-  lines = new vector<line>(height);
+  width_ = w;
+  height_ = h+2; //+2 means include outline of the block
+  lines_ = new vector<Line>(height_);
 }
 
-screen::screen(){}
+Screen::Screen(){}
 
-void screen::screeninit(int w,int h) //For ourside init
+//function: init a screen object with a width of w and height of h
+//input: the width and height of the screen
+void Screen::screeninit(int w,int h) //For ourside init
 {
-  width = w;
-  height = h+2; //+2 means include outline of the block
-  lines = new vector<line>(height);
+  width_ = w;
+  height_ = h+2; //+2 means include outline of the block
+  lines_ = new vector<Line>(height_);
 }
 
-void screen::setHead(string heading)
+//function: set the heading of this screen
+//input: string heading
+void Screen::setHead(string heading)
 {
-  line header(heading,width,MIDDLE_JUST,"="); //Use "=" to regulate the head
-  line end("",width,MIDDLE_JUST,"=") ;//This function Will print out the
-  (*lines)[0] = header;
-  (*lines)[height-1] = end;
+  Line header(heading,width_,MIDDLE_JUST,"="); //Use "=" to regulate the head
+  Line end("",width_,MIDDLE_JUST,"=") ;//This function Will print out the
+  (*lines_)[0] = header;
+  (*lines_)[height_-1] = end;
 }
 
-void screen::setLine(string line_content,int format)
+//function: set each line of the screen display
+//input: string line_content, format has three options
+void Screen::setLine(string line_content,int format)
 {
-  line current_line(line_content,width,format);
-  (*lines)[line_index] = current_line;
-  line_index++;
+  Line current_line(line_content,width_,format);
+  (*lines_)[line_index_] = current_line;
+  line_index_++;
 }
 
-void screen::screenprint(void)
+//function: print out this screen object as a whole
+//an sample will be like this:
+/*
+===============heading==================
+line
+line
+line
+========================================
+*/
+void Screen::screenprint(void)
 {
-  for(int i = 0;i<height;i++)
+  for(int i = 0;i<height_;i++)
   {
-    cout<<(*lines)[i]<<endl;
+    cout<<(*lines_)[i]<<endl;
   }
 }
 
-screen::~screen()
+//destructor
+Screen::~Screen()
 {
-  delete lines;
-  lines = NULL;
+  delete lines_;
+  lines_ = NULL;
 }
 /*===================Screen_end=========================*/
 
 /*====================menu_start========================*/
-menu::menu(string heading,int choce_num,int wid)
+//constructor
+Menu::Menu(string heading,int chose_num,int wid)
 {
-  screeninit(wid,choce_num);
+  screeninit(wid,chose_num);
   setHead(heading);
-  choice_num = choce_num;
+  choice_num_ = chose_num;
 }
 
-void menu::setMenuChoices(string choice_list[])
+//Because the inheritance from screen functions below are similar
+void Menu::setMenuChoices(string choice_list[])
 {
-  for(int i=0;i<choice_num;i++)
+  for(int i=0;i<choice_num_;i++)
   {
     setLine(choice_list[i],MIDDLE_JUST);
   }
 }
 
-void menu::menuPrint()
+void Menu::menuPrint()
 {
   screenprint();
 }
 
-menu::~menu()
+Menu::~Menu()
 {
-  delete lines;
-  lines = NULL;
+  delete lines_;
+  lines_ = NULL;
 }
 /*====================menu_end========================*/
 
@@ -142,32 +170,33 @@ menu::~menu()
 //Attention: Qustion heading is not question;
 //Question heading indicate the number of question or other information
 
-question::question(string heading,int choce_num,int wid)
+Question::Question(string heading,int chose_num,int wid)
 {
-  screeninit(wid,choce_num+1);  // Since there need space for Question description
+  screeninit(wid,chose_num+1);  // Since there need space for Question description
   setHead(heading);
-  choice_num = choce_num;
+  choice_num_ = chose_num;
 }
 
-void question::setQuestion(string que,string choice_list[])
+//Because the inheritance from screen functions below are similar
+void Question::setQuestion(string que,string choice_list[])
 {
   setLine(que,MIDDLE_JUST);
   string prefix[4]={"A. ","B. ","C. ","D. "};
-  for(int i = 0;i<choice_num;i++)
+  for(int i = 0;i<choice_num_;i++)
   {
     setLine(prefix[i]+choice_list[i],LEFT_JUST);
   }
 }
 
-void question::questionPrint()
+void Question::questionPrint()
 {
   screenprint();
 }
 
-question::~question()
+Question::~Question()
 {
-  delete lines;
-  lines = NULL;
+  delete lines_;
+  lines_ = NULL;
 }
 /*===================Question_end=======================*/
 
@@ -175,7 +204,10 @@ question::~question()
 //Attention: since the length of message is undeterminated
 //Assume the description Might Have multiplelines/
 // Default using Middle-justify
-message::message(string heading,string content,int wid)
+
+//constructor of Message, init a Message object
+//input: the heading the content and the width of the message
+Message::Message(string heading,string content,int wid)
 {
   int length = content.length();
   int line_num = 0;
@@ -186,20 +218,21 @@ message::message(string heading,string content,int wid)
   for(int i = 0;i<line_num-1;i++)
   {
     setLine(content.substr(begin_index,wid),LEFT_JUST);
-    begin_index +=width;
+    begin_index +=width_;
   }
   setLine(content.substr(begin_index),LEFT_JUST);//Show the last line of the string
 }
 
-void message::MessagePrint()
+//print the Message object out
+void Message::MessagePrint()
 {
   screenprint();
 }
 
-message::~message()
+Message::~Message()
 {
-  delete lines;
-  lines = NULL;
+  delete lines_;
+  lines_ = NULL;
 }
 /*===================Message_End=======================*/
 /*

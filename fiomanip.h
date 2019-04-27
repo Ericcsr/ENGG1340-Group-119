@@ -16,10 +16,10 @@ int check_file(int file_condition[]);
 void reset_check_file(int index,int file_condition[]);
 
 
-class filelist
+class Filelist
 {
     public:
-        filelist(string infile,string outfile);
+        Filelist(string infile,string outfile);
         vector<string> pop_end(void);
         vector<string> pop_front(void);
         void push_head(vector<string> new_item);
@@ -32,13 +32,13 @@ class filelist
         void refresh(void);
         int getSize(void);
         vector<string> &operator[](int i);
-        ~filelist();
+        ~Filelist();
     private:
-        vector<vector<string>> *buffer_list;
-        vector<vector<string>>::iterator list_itr;
-        string ifile;
-        string ofile;
-        int size = 0;
+        vector<vector<string>> *buffer_list_;
+        vector<vector<string>>::iterator list_itr_;
+        string ifile_;
+        string ofile_;
+        int size_ = 0;
         void readFile(string infile);
         void writeFile(string outfile);
         string FormatHandler(vector<string>);

@@ -1,51 +1,71 @@
 #include "word.h"
 //=====================Start_class_word========================
-word::word(vector<string> word_init)
+//Function: Init the Word
+//Input: the raw vector
+//Output: Nothing
+Word::Word(vector<string> word_init)
 {
     //wordcontent = new vector<string>;
-    wordcontent = word_init;
+    word_content_ = word_init;
 }
 
-word::word(){}
-
-string word::ShowWord()
+//Function: Overload in case I want to create a word without initialization
+Word::Word(){}
+//Function this shows the content of word
+//Input: Nothing
+//Output: The content string of the word
+string Word::ShowWord()
 {
-    return wordcontent[0];
+    return word_content_[0];
 }
-
-string word::ShowDescription()
+//Function: show the description of the word
+//Input:Nothing
+//Output: the description of the word (String)
+string Word::ShowDescription()
 {
-    return wordcontent[1];
+    return word_content_[1];
 }
-
-string word::ShowExplain()
+//function: Show the explanation of the word
+//Input: Nothing
+//Output:The string explanation. 
+string Word::ShowExplain()
 {
-  return wordcontent[2];
+  return word_content_[2];
 }
-
-int word::getRank()
+//Function: show the rank of of the word
+//Input:Nothing
+//Output: The rank (int) of the word
+int Word::getRank()
 {
-    return (int)(wordcontent[3][0]-'0');
+    return (int)(word_content_[3][0]-'0');
 }
-
-vector<string> word::getWord_raw()
+//Function:When dealing with insert 
+//input: none
+//output: a string containing all the scores of all the words
+vector<string> Word::getWord_raw()
 {
-    return wordcontent;
+    return word_content_;
 }
 
-void word::Right_Handler()
+//function: change the score of the word when user answer a question right
+//input: none
+//output: set the score of this word to zero
+void Word::Right_Handler()
 {
     //(*wordcontent)[2][0]-=5;
-    (wordcontent)[3][0] = '0';
+    (word_content_)[3][0] = '0';
 }
 
-void word::Wrong_Handler()
+//function: change the score of the word when user answer a question wrong
+//input: none
+//output: the score of this word minus one
+void Word::Wrong_Handler()
 {
 
-    wordcontent[3][0]--;
+    word_content_[3][0]--;
 }
 
-word::~word()
+Word::~Word()
 {
     //delete wordcontent;
     //wordcontent = NULL;
@@ -53,17 +73,21 @@ word::~word()
 //=====================End_Class_word============================
 
 //=====================Start_Class_wordlist======================
-wordlist::wordlist(vector<vector<string>> new_list)
+
+//function: init the Wordlist object
+//input: a 2D vector containing all the words and their information
+//output: none
+Wordlist::Wordlist(vector<vector<string>> new_list)
 {
     //word_list = new vector<word>;
     int index=0;
-    size = new_list.size();
-    while(index<size)
+    size_ = new_list.size();
+    while(index<size_)
     {
 
-        word new_word(new_list[index]);
+        Word new_word(new_list[index]);
         //cout<<new_word.getRank()<<endl;
-        word_list.push_back(new_word);
+        word_list_.push_back(new_word);
         //cout<<<<end;
 
         //cout<<"I am alive"<<endl;
@@ -77,49 +101,58 @@ wordlist::wordlist(vector<vector<string>> new_list)
 
 }
 
-int wordlist::insert(word new_word)
+//function: insert a word to Wordlist subject ascending order
+//input: the Word(1D vector)
+//output: none
+int Wordlist::insert(Word new_word)
 {
-    for(int i = 0;i<size;i++)
+    for(int i = 0;i<size_;i++)
     {
         //cout<<new_word.getRank()<<" "<<word_list[i].getRank()<<endl;
-        if(new_word.getRank()>word_list[i].getRank())
+        if(new_word.getRank()>word_list_[i].getRank())
         {
-            word_list.insert(word_list.begin()+i,new_word);
-            size++;
+            word_list_.insert(word_list_.begin()+i,new_word);
+            size_++;
             return i;
         }
     }
-    word_list.push_back(new_word);
+    word_list_.push_back(new_word);
     //cout<<"Fool"<<endl;
-    size++;
-    return size-1;
+    size_++;
+    return size_-1;
 }
 
-void wordlist::push_back(word new_word)
+//function: push a word to the back of a Wordlist
+void Wordlist::push_back(Word new_word)
 {
-    word_list.push_back(new_word);
-    size++;
+    word_list_.push_back(new_word);
+    size_++;
 }
 
-word wordlist::pop_front(void)
+//function: popup the front Word in Wordlist and then delete it.
+Word Wordlist::pop_front(void)
 {
-    if(size>0)
+    if(size_>0)
     {
-        word result = word_list[0];
-        word_list.erase(word_list.begin(),word_list.begin()+1);
-        size--;
+        Word result = word_list_[0];
+        word_list_.erase(word_list_.begin(),word_list_.begin()+1);
+        size_--;
         return result;
     }
     cout<<"No Word to Pop!"<<endl;
     exit(1);
 }
 
-int wordlist::getSize()
+//function: get the size of a Wordlist
+//input: none
+//output: a int indicating the size
+int Wordlist::getSize()
 {
-  return size;
+  return size_;
 }
 
-wordlist::~wordlist()
+//function: destructor
+Wordlist::~Wordlist()
 {
     //delete word_list;
     //word_list = NULL;

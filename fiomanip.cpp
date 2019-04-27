@@ -1,8 +1,11 @@
 #include "fiomanip.h"
 //=================class_<file_list>_start==================
-void filelist::readFile(string infile)
+//Functionality: Read data from a file and save them inside a 2-D array
+//Input: Name of the input file
+//Output: Change the content of buffer file
+void Filelist::readFile(string infile)
 {
-    buffer_list = new vector<vector<string>>;
+    buffer_list_ = new vector<vector<string>>;
     ifstream fin;
     string str_buffer;
     fin.open(infile);
@@ -16,29 +19,35 @@ void filelist::readFile(string infile)
             buffer_vect.push_back(str_buffer.substr(0,cursor));
             str_buffer.erase(0,cursor+1);
         }
-        buffer_list->push_back(buffer_vect);
-        size++;
+        buffer_list_->push_back(buffer_vect);
+        size_++;
     }
-    list_itr = buffer_list->begin();
+    list_itr_ = buffer_list_->begin();
     fin.close();
 }
-
-void filelist::writeFile(string outfile)//,vector<vector<string>> buf_list)
+//Functionality: Write content of 2-D runtime array into a file with same input
+//Input: name of out put file
+//Output: Nothing
+void Filelist::writeFile(string outfile)//,vector<vector<string>> buf_list)
 {
     ofstream fout;
     string str_2_write;
     fout.open(outfile);
     if(fout.fail())
         file_error_handler(outfile);
-    for(int i=0;i<size;i++)
+    for(int i=0;i<size_;i++)
     {
-        str_2_write = FormatHandler((*buffer_list)[i]);
+        str_2_write = FormatHandler((*buffer_list_)[i]);
         fout<<str_2_write<<endl;
     }
     fout.close();
 }
+//Functionality: change the content inside the string vector into a string that has comprehansive
+//seperator to be read
+//Input: A string vector
+//Output: A string whose element is seperated by @
 
-string filelist::FormatHandler(vector<string> target)
+string Filelist::FormatHandler(vector<string> target)
 {
     vector<string>::iterator itr = target.begin();
     string str_result;
@@ -49,144 +58,165 @@ string filelist::FormatHandler(vector<string> target)
     }
     return str_result;
 }
-
-filelist::filelist(string infile,string outfile)
+//Functionality: Constructor of filelist class take in name of input and output file
+//Input :name of the input and output file
+//Output: Nothing change the private name of input output file
+Filelist::Filelist(string infile,string outfile)
 {
     readFile(infile);
     writeFile(outfile);//*buffer_list); //
-    ofile =  outfile;
-    ifile = infile;
+    ofile_ =  outfile;
+    ifile_ = infile;
+}
+//Functionality: Get the size of the filelist for multiple use
+//Input: Nothing
+//Output: The size of the filelist
+int Filelist::getSize(void)
+{
+    return size_;
 }
 
-int filelist::getSize(void)
+//Functionality: Consider file as a list, this function can pop the first vector in the list
+//as well as reduce the length of this list by one
+//Input: Nothing
+//Output: The vector of string to be poped
+vector<string> Filelist::pop_end(void)
 {
-    return size;
-}
-
-//This function return the last item of the 2-D vector
-//As well as destory it
-vector<string> filelist::pop_end(void)
-{
-    if(size>0)
-        size--;
+    if(size_>0)
+        size_--;
     else
     {
         cout<<"No Vector to be pop End"<<endl;
         exit(1);
     }
-    vector<string> result = (*buffer_list)[size];
-    buffer_list->pop_back();
-    writeFile(ofile);
+    vector<string> result = (*buffer_list_)[size_];
+    buffer_list_->pop_back();
+    writeFile(ofile_);
     return result;
 }
-
-//This function return the first item of the 2-D vector
-//As well as destory it
-vector<string> filelist::pop_front(void)
+//Functionality: Delete the last element as well as return it
+//Input: Nothing
+//Output: The first element of the filelist
+vector<string> Filelist::pop_front(void)
 {
-    if(size>0)
-        size--;
+    if(size_>0)
+        size_--;
     else
     {
         cout<<"No vector to be pop Front"<<endl;
         exit(1);
     }
-    vector<string> result = (*buffer_list)[0];
-    buffer_list->erase(buffer_list->begin(),buffer_list->begin()+1); //Delete the element and automatically free memo
-    writeFile(ofile);
-    list_itr = buffer_list->begin();
+    vector<string> result = (*buffer_list_)[0];
+    buffer_list_->erase(buffer_list_->begin(),buffer_list_->begin()+1); //Delete the element and automatically free memo
+    writeFile(ofile_);
+    list_itr_ = buffer_list_->begin();
     return result;
 }
-//This function add a new object at the very beginning
-//and increase the size of the vector
-void filelist::push_head(vector<string> new_item)
+//Functionality: This function put the newly add item as the first item of the filelist
+//Input: The new string vector to be put as the head
+//Output: Nothing increase the size of the list
+void Filelist::push_head(vector<string> new_item)
 {
-    size++;
-    buffer_list->insert(buffer_list->begin(),new_item);
-    writeFile(ofile);
-    list_itr = buffer_list->begin();
+    size_++;
+    buffer_list_->insert(buffer_list_->begin(),new_item);
+    writeFile(ofile_);
+    list_itr_ = buffer_list_->begin();
 }
-
-void filelist::append(vector<string> new_item)
+//Functionality: This function add a new item at the end of filelist
+//Input: The item to be add to the end
+//Output: Nothing
+void Filelist::append(vector<string> new_item)
 {
-    buffer_list->push_back(new_item);
-    size++;
-    writeFile(ofile);
+    buffer_list_->push_back(new_item);
+    size_++;
+    writeFile(ofile_);
 }
-//This function can remove a item of given index inside the file list
-void filelist::remove(int index)
+//Functionality: Remove an item with given index
+//Input: the index of the item
+//Output: Nothing
+void Filelist::remove(int index)
 {
-    if(index>=size)
+    if(index>=size_)
     {
         cout<<"Index out of range"<<endl;
         exit(1);
     }
-    buffer_list->erase(buffer_list->begin()+index,buffer_list->begin()+index+1);
-    size--;
-    list_itr = buffer_list->begin();
-    writeFile(ofile);
+    buffer_list_->erase(buffer_list_->begin()+index,buffer_list_->begin()+index+1);
+    size_--;
+    list_itr_ = buffer_list_->begin();
+    writeFile(ofile_);
 }
-//This function can search for given vector and return its index;
-int filelist::search(vector<string> target)
+//Functionality: This function can search for given vector and return its index
+//Input: The target vector of string
+//Output the index of the string
+int Filelist::search(vector<string> target)
 {
     int index = 0;
-    while(list_itr!=buffer_list->end())
+    while(list_itr_!=buffer_list_->end())
     {
-        if((*list_itr)[0]==target[0]) //Only compare first value
+        if((*list_itr_)[0]==target[0]) //Only compare first value
         {
-            list_itr = buffer_list->begin();// Update the position of the iterator
+            list_itr_ = buffer_list_->begin();// Update the position of the iterator
             return index;
         }
-        list_itr++;
+        list_itr_++;
         index++;
     }
     return -1; //This is default No fund value
 }
-//This function can insert a target to the function
-void filelist::insert(vector<string> new_item,int index)
+//Functionality: This function can insert a target to the function given index
+//Input: The index
+//Output: Nothing
+void Filelist::insert(vector<string> new_item,int index)
 {
-    if(index>size)
+    if(index>size_)
     {
         cout<<"Index out of range"<<endl;
         exit(1);
     }
-    buffer_list->insert(buffer_list->begin()+index,new_item);
-    list_itr = buffer_list->begin();
-    size++;
-    writeFile(ofile);
+    buffer_list_->insert(buffer_list_->begin()+index,new_item);
+    list_itr_ = buffer_list_->begin();
+    size_++;
+    writeFile(ofile_);
 }
-//This [] operator reload allow user to access vector members as usual
-//Warning Potential bug may exist
-vector<string> &filelist::operator[](int i)
+//Functionality: Overload the operator[] for filelist to make the list more like a list
+//Input: The index
+//Output: The item indicated by given index
+vector<string> &Filelist::operator[](int i)
 {
-    return (*buffer_list)[i];
+    return (*buffer_list_)[i];
 }
-//This might be only valid function it might use
-//Return a decoded 2-d vector
-vector<vector<string>> filelist::getRawdata()
+//Functionality: get the raw data to init the wordlist
+//Input:  Nothing
+//Output: Return a decoded 2-d vector
+vector<vector<string>> Filelist::getRawdata()
 {
-    return *buffer_list;
-}
-
-void filelist::setRawdata(vector<vector<string>> updated_list)
-{
-    *buffer_list = updated_list; //Warning No reference
-    writeFile(ofile);
+    return *buffer_list_;
 }
 
-//This function can be used to update, re-read ifile to outfile
-void filelist::refresh()
+//Functionality: give a 2-D array and init the filelost with given list 
+//Input: The new 2-D vector to be init
+//Output: Nothing
+void Filelist::setRawdata(vector<vector<string>> updated_list)
 {
-    readFile(ifile);
-    writeFile(ofile);
+    *buffer_list_ = updated_list; //Warning No reference
+    writeFile(ofile_);
+}
+
+//Function: This function can be used to update, re-read ifile to outfile.
+//Input==Output: Nothing
+void Filelist::refresh()
+{
+    readFile(ifile_);
+    writeFile(ofile_);
 }
 
 //This is defination of destructor
 //Only when this object is created as a dynamic object can this be deleted
-filelist::~filelist()
+Filelist::~Filelist()
 {
-    delete buffer_list;
-    buffer_list = NULL; //Avoid dangling pointer
+    delete buffer_list_;
+    buffer_list_ = NULL; //Avoid dangling pointer
 }
 
 
@@ -195,16 +225,20 @@ filelist::~filelist()
 //=====================Class_filelist_end================================
 
 //=======================Independent functions==========================
-
+//Functionality: Report the file open error
+//Input: The name of the error file
+//Output: Exit the program
 void file_error_handler(string name)
 {
-    cout<<"File Name: "<<name<<"Could not Open!"<<endl;
+    cout<<"File Name: "<<name<<" Could not Open!"<<endl;
     exit(1);
 }
 
 
-//Using another file to record the condition of current files
-//It can change file condition sent to it as well as check the existance of the file
+//Functionality: read the check file to check open condition of the each file
+//It can be used to tell which fill can be resumed after shut down
+//Input: An array indicate the runtime condition
+//Output: The check result
 int check_file(int file_condition[])
 {
     ifstream testin;
@@ -222,7 +256,9 @@ int check_file(int file_condition[])
     testin.close();
     return 1;
 }
-
+//Functionality: Reset and map the change to the checkfile
+//Input: index of command , file condition array
+//Output:Nothing
 void reset_check_file(int index,int file_condition[]) // 3 reoresent all files
 {
     ofstream testout;
