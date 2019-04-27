@@ -25,23 +25,23 @@ Learning English as a second language, we profoundly understand the difficulty t
 5. Preserve running datas in files and update them in real time.
 6. Determine which word to popup next based on a rule subject to "Ebbinghaus forgetting curve".
 ## Functionalities and Features
-We successfully solve all the problem settings. Therefore user is expected to enjoy all the functions we mentioned in [Problem Setting>In user's view](https://github.com/Ericcsr/ENGG1340-Group-119/blob/master/README.md#in-users-view).
+We successfully solve all the problem settings. Therefore user is expected to enjoy all the functions we mentioned in [Problem Setting>In user's view](https://github.com/Ericcsr/ENGG1340-Group-119#in-users-view).
 
-More advanced features are waiting to be discovered by you! Or you can [click here](http://) to check them.
+More advanced features are waiting to be discovered by you! Or you can [click here](https://github.com/Ericcsr/ENGG1340-Group-119#advanced-features) to check them.
 ## Input/Output Specifications
-### Input :abc:
+### Input :abcd:
 You will mainly be dealing with multiple choice questions where only entering int or char leading each option is fine. What's more, you can always enter `#home` to go back to homepage. 
-### Output :abc:
+### Output :abcd:
 New messages will appear right after your input, no new window will popup.
 ## Compilation and Execution Instructions
 This project is only guaranteed to work in Linux.os. Clone the master brunch to your local path and open this directory in terminal. Enter `make wordmemor` to compile and `./wordmemor` to execute the project! While the programme is running , just follow the instructions and enjoy the process of exploring English words!
 ## Advanced Features
 ### Change Interface
 Open "screenplay.cpp", by simply changing the value of "WIDTH" in the macro defination part, you can change the size of the interface to fit your screen.
+### Add New Words
+Also, you can add new words to the (category).txt, be careful to write in the form of "word@choice@details@9@". We will detect the change and the new words will popup sometime.
 ### Switch Between Categories
 While you are learning a particular category, you can jump to another category when feeling bored. For example, say, you are learning business words, you can go to home page and start to learn sports terms. However, you do not need to worry that your footprint in business might be lost, we have already save it for you. 
 
-You can learn about the logic of this function in the following program chart.
-![image]()
-### Add New Words
-Also, you can enlarge the database by extend the (category).txt, be careful to write in the form of "word@choice@details@9@"
+You can learn more about the logic of this function in the following program chart.
+![image](https://github.com/Ericcsr/ENGG1340-Group-119/blob/master/program%20chart.jpg)
