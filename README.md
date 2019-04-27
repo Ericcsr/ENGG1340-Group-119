@@ -34,13 +34,15 @@ You will mainly be dealing with multiple choice questions where only entering in
 ### Output :abcd:
 New messages will appear right after your input, no new window will popup.
 ## Compilation and Execution Instructions
-This project is only guaranteed to work in Linux.os. Clone the master brunch to your local path and open this directory in terminal. Enter `make wordmemor` to compile and `./wordmemor` to execute the project! While the programme is running , just follow the instructions and enjoy the process of exploring English words!
+This project is only guaranteed to work in Linux.os. Clone the master brunch to your local path and open this directory in terminal. Enter `make wordmemor` to compile and `make run` or `./wordmemor` to execute the project! While the programme is running , just follow the instructions and enjoy the process of exploring English words!
 ## Advanced Features
 ### Change Interface
 Open "screenplay.cpp". By simply changing the value of "WIDTH" in the macro defination part, you can change the size of the interface to fit your screen.
 ### Add New Words
 Also, you can add new words to the (category).txt, be careful to write in the form of 
-``` word@choice@details@9@ ```
+``` 
+word@choice@details@9@ 
+```
 We will detect the change and the new words will popup sometime.
 ### Switch Between Categories
 While you are learning a particular category, you can jump to another category when feeling bored. For example, say, you are learning business words, you can go to home page and start to learn sports terms. However, you do not need to worry that your footprint in business might be lost, we have already save it for you. 
